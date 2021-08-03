@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+blog_article_admin,blog.article.admin,model_blog_article,blog_group_admin,1,1,1,1
+blog_category_admin,blog.category.admin,model_blog_category,blog_group_admin,1,1,1,1
+blog_gallery_admin,blog.gallery.admin,model_blog_gallery,blog_group_admin,1,1,1,1
+export_service_admin,export.service.admin,model_export_service,blog_group_admin,1,1,1,1
+export_settings_admin,export.settings.admin,model_export_settings,blog_group_admin,1,1,1,1

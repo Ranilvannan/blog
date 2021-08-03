@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="export_service_form" model="ir.ui.view">
+        <field name="name">export.service.form</field>
+        <field name="model">export.service</field>
+        <field name="arch" type="xml">
+            <form string="Export Service">
+                <sheet>
+                    <group col="1">
+                        <button name="trigger_article_export" string="Article Export" type="object" class="oe_highlight"/>
+                        <button name="trigger_category_export" string="Category Export" type="object" class="oe_highlight"/>
+                        <button name="trigger_gallery_export" string="Gallery Export" type="object" class="oe_highlight"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="export_service_action" model="ir.actions.act_window">
+        <field name="name">Export Service</field>
+        <field name="res_model">export.service</field>
+        <field name="view_mode">form</field>
+    </record>
+
+    <menuitem id="export_service_menu"
+              name="Export Service"
+              parent="blog_menu"
+              action="export_service_action"
+              sequence="40"/>
+
+</odoo>
