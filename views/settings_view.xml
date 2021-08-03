@@ -34,7 +34,7 @@
     <record id="export_settings_action" model="ir.actions.act_window">
         <field name="name">Export Service</field>
         <field name="res_model">export.settings</field>
-        <field name="view_mode">form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem id="export_settings_menu"

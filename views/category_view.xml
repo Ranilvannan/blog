@@ -33,7 +33,7 @@
     <record id="blog_category_action" model="ir.actions.act_window">
         <field name="name">Category</field>
         <field name="res_model">blog.category</field>
-        <field name="view_mode">form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem id="blog_category_menu"

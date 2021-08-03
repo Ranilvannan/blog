@@ -69,11 +69,11 @@ class ExportService(models.TransientModel):
                 "url": rec.url,
                 "title": rec.title,
                 "preview": rec.preview,
-                "image_filename": rec.gallery_id.filename,
-                "image_filepath": rec.gallery_id.filepath,
+                "image_filename": rec.gallery_id.name,
+                "image_filepath": rec.gallery_id.path,
                 "image_description": rec.gallery_id.description,
-                "galleries": [{"image_filename": gallery.filename,
-                               "image_filepath": gallery.filepath,
+                "galleries": [{"image_filename": gallery.name,
+                               "image_filepath": gallery.path,
                                "image_description": gallery.description} for gallery in rec.gallery_ids],
                 "previous_title": rec.prev_id.title,
                 "previous_url": rec.prev_id.url,
@@ -111,8 +111,8 @@ class ExportService(models.TransientModel):
         for rec in recs:
             image = {
                 "gallery_id": rec.id,
-                "name": rec.filename,
-                "path": rec.filepath,
+                "name": rec.name,
+                "path": rec.path,
                 "description": rec.description
             }
             galleries.append(image)

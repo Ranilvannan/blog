@@ -55,7 +55,7 @@
     <record id="blog_article_action" model="ir.actions.act_window">
         <field name="name">Article</field>
         <field name="res_model">blog.article</field>
-        <field name="view_mode">form</field>
+        <field name="view_mode">tree,form</field>
     </record>
 
     <menuitem id="blog_article_menu"
