@@ -54,36 +54,44 @@ class ExportService(models.TransientModel):
                 "url": rec.url,
                 "title": rec.title,
                 "preview": rec.preview,
-                "image": {
-                    "id": rec.gallery_id.id,
-                    "name": rec.gallery_id.name,
-                    "path": rec.gallery_id.path,
-                    "description": rec.gallery_id.description,
-                },
-                "galleries": [{
-                    "id": gallery.id,
-                    "name": gallery.name,
-                    "path": gallery.path,
-                    "description": gallery.description} for gallery in rec.gallery_ids],
-                "category": {
-                    "id": rec.category_id.id,
-                    "name": rec.category_id.name,
-                    "code": rec.category_id.code,
-                    "url": rec.category_id.url,
-                    "description": rec.category_id.description,
-                },
-                "sub_category": {
-                    "id": rec.category_id.id,
-                    "name": rec.category_id.name,
-                    "code": rec.category_id.code,
-                    "url": rec.category_id.url,
-                    "description": rec.category_id.description,
-                },
                 "content": rec.content,
                 "previous": rec.get_previous(),
                 "next": rec.get_next(),
                 "related_ids": rec.get_related()
             }
+
+            if rec.category_id:
+                data["category"] = {
+                    "id": rec.category_id.id,
+                    "name": rec.category_id.name,
+                    "code": rec.category_id.code,
+                    "url": rec.category_id.url,
+                    "description": rec.category_id.description,
+                }
+
+            if rec.sub_category_id:
+                data["sub_category"] = {
+                    "id": rec.sub_category_id.id,
+                    "name": rec.sub_category_id.name,
+                    "code": rec.sub_category_id.code,
+                    "url": rec.sub_category_id.url,
+                    "description": rec.sub_category_id.description,
+                }
+
+            if rec.gallery_ids:
+                data["galleries"] = [{
+                    "id": gallery.id,
+                    "name": gallery.name,
+                    "path": gallery.path,
+                    "description": gallery.description} for gallery in rec.gallery_ids]
+
+            if rec.gallery_id:
+                data["image"] = {
+                    "id": rec.gallery_id.id,
+                    "name": rec.gallery_id.name,
+                    "path": rec.gallery_id.path,
+                    "description": rec.gallery_id.description,
+                }
 
             article.append(data)
 
