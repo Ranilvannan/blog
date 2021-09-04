@@ -1,12 +1,9 @@
-from odoo import models, fields, api, exceptions
-from odoo.tools import config
+from odoo import models, fields
 import os
 import json
 from datetime import datetime
 import tempfile
 from paramiko import SSHClient, AutoAddPolicy
-
-BLOG_FILENAME = "_blog.json"
 
 
 class ExportService(models.TransientModel):
@@ -32,7 +29,8 @@ class ExportService(models.TransientModel):
 
     def trigger_article_export(self):
         recs = self.env["blog.article"].search([("is_exported", "=", False),
-                                                ("is_completed", "=", True)])[:100]
+                                                ("is_completed", "=", True),
+                                                ("category_id.type_id", "=", self.type_id.id)])[:10]
 
         if recs:
             filename = "_{0}_{1}".format(self.type_id.code, "blog.json")
@@ -51,20 +49,19 @@ class ExportService(models.TransientModel):
                 "id": rec.id,
                 "date": rec.date.strftime("%d-%m-%Y"),
                 "published_on": rec.published_on.strftime("%d-%m-%Y"),
+                "blog_type": rec.category_id.type_id.code,
                 "name": rec.name,
                 "url": rec.url,
                 "title": rec.title,
                 "preview": rec.preview,
                 "image": {
                     "id": rec.gallery_id.id,
-                    "date": rec.gallery_id.date,
                     "name": rec.gallery_id.name,
                     "path": rec.gallery_id.path,
                     "description": rec.gallery_id.description,
                 },
                 "galleries": [{
                     "id": gallery.id,
-                    "date": gallery.date,
                     "name": gallery.name,
                     "path": gallery.path,
                     "description": gallery.description} for gallery in rec.gallery_ids],
@@ -73,7 +70,6 @@ class ExportService(models.TransientModel):
                     "name": rec.category_id.name,
                     "code": rec.category_id.code,
                     "url": rec.category_id.url,
-                    "type_id": rec.category_id.type_id.id,
                     "description": rec.category_id.description,
                 },
                 "sub_category": {
@@ -83,7 +79,10 @@ class ExportService(models.TransientModel):
                     "url": rec.category_id.url,
                     "description": rec.category_id.description,
                 },
-                "content": rec.content
+                "content": rec.content,
+                "previous": rec.get_previous(),
+                "next": rec.get_next(),
+                "related_ids": rec.get_related()
             }
 
             article.append(data)
@@ -99,7 +98,7 @@ class ExportService(models.TransientModel):
         return tmp_file
 
     def move_tmp_file(self, tmp_file):
-        settings = self.env["export.settings"].search([("code", "=", "EXP")])
+        settings = self.env["export.settings"].search([("type_id", "=", self.type_id.id)])
         filename = os.path.basename(tmp_file.name)
         source = tmp_file.name
         destination = os.path.join(settings.path, filename)
