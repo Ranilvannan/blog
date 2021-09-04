@@ -12,6 +12,7 @@ class ExportSettings(models.Model):
     username = fields.Char(string="username", required=True)
     key_file = fields.Char(string="Key File", required=True)
     path = fields.Char(string="Export Path", required=True)
+    type_id = fields.Many2one(comodel_name="blog.type", string="Type", required=True)
 
     _sql_constraints = [
         ('code_uniq', 'unique (code)', 'Export Settings must be unique !')

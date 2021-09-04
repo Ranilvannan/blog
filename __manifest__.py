@@ -16,7 +16,9 @@
         'security/ir.model.access.csv',
         'views/menu_view.xml',
         'views/article_view.xml',
+        'views/blog_type_view.xml',
         'views/category_view.xml',
+        'views/sub_category_view.xml',
         'views/gallery_view.xml',
         'views/settings_view.xml',
         'wizard/export_service_view.xml'

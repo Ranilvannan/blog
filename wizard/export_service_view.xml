@@ -8,6 +8,7 @@
             <form string="Export Service">
                 <sheet>
                     <group col="1">
+                        <fiend name="type_id" required="1"/>
                         <button name="trigger_article_export" string="Article Export" type="object" class="oe_highlight"/>
                         <button name="trigger_category_export" string="Category Export" type="object" class="oe_highlight"/>
                         <button name="trigger_gallery_export" string="Gallery Export" type="object" class="oe_highlight"/>

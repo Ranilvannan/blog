@@ -11,5 +11,20 @@
             <field eval="False" name="company_id"/>
         </record>
 
+        <record id="blog_type_tech" model="blog.type">
+            <field name="name">Tech Blog</field>
+            <field name="code">TECH</field>
+        </record>
+
+        <record id="blog_type_tourist" model="blog.type">
+            <field name="name">Tourist Blog</field>
+            <field name="code">TECH</field>
+        </record>
+
+        <record id="blog_type_food" model="blog.type">
+            <field name="name">Food Blog</field>
+            <field name="code">FOOD</field>
+        </record>
+
     </data>
 </odoo>

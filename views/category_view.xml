@@ -11,6 +11,7 @@
                         <field name="name"/>
                         <field name="code"/>
                         <field name="url"/>
+                        <field name="type_id"/>
                         <field name="description"/>
                     </group>
                 </sheet>
@@ -26,6 +27,7 @@
                 <field name="name"/>
                 <field name="code"/>
                 <field name="url"/>
+                <field name="type_id"/>
             </tree>
         </field>
     </record>
@@ -40,6 +42,6 @@
               name="Category"
               parent="blog_menu"
               action="blog_category_action"
-              sequence="20"/>
+              sequence="30"/>
 
 </odoo>
