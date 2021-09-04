@@ -18,7 +18,7 @@
 
         <record id="blog_type_tourist" model="blog.type">
             <field name="name">Tourist Blog</field>
-            <field name="code">TECH</field>
+            <field name="code">TOURIST</field>
         </record>
 
         <record id="blog_type_food" model="blog.type">

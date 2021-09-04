@@ -14,6 +14,17 @@
                         <field name="type_id"/>
                         <field name="description"/>
                     </group>
+                    <notebook>
+                        <page string="Sub Category">
+                            <field name="sub_category_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="url"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

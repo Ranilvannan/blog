@@ -42,6 +42,6 @@
               name="Gallery"
               parent="blog_menu"
               action="blog_gallery_action"
-              sequence="50"/>
+              sequence="60"/>
 
 </odoo>

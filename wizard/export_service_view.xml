@@ -7,12 +7,10 @@
         <field name="arch" type="xml">
             <form string="Export Service">
                 <sheet>
-                    <group col="1">
-                        <fiend name="type_id" required="1"/>
-                        <button name="trigger_article_export" string="Article Export" type="object" class="oe_highlight"/>
-                        <button name="trigger_category_export" string="Category Export" type="object" class="oe_highlight"/>
-                        <button name="trigger_gallery_export" string="Gallery Export" type="object" class="oe_highlight"/>
+                    <group>
+                        <field name="type_id" required="1"/>
                     </group>
+                    <button name="trigger_article_export" string="Article Export" type="object" class="oe_highlight"/>
                 </sheet>
             </form>
         </field>
@@ -28,6 +26,6 @@
               name="Export Service"
               parent="blog_menu"
               action="export_service_action"
-              sequence="40"/>
+              sequence="80"/>
 
 </odoo>
