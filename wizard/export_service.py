@@ -106,7 +106,7 @@ class ExportService(models.TransientModel):
         return tmp_file
 
     def move_tmp_file(self, tmp_file):
-        settings = self.env["export.settings"].search([("type_id", "=", self.type_id.id)])
+        settings = self.type_id.export_id
         filename = os.path.basename(tmp_file.name)
         source = tmp_file.name
         destination = os.path.join(settings.path, filename)

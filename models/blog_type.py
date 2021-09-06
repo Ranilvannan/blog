@@ -8,6 +8,7 @@ class BlogType(models.Model):
 
     name = fields.Char(string="Name", required=True)
     code = fields.Char(string="Code", required=True)
+    export_id = fields.Many2one(comodel_name="export.settings", string="Export Settings", required=True)
     description = fields.Text(string="Description")
 
     _sql_constraints = [
