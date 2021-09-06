@@ -46,7 +46,7 @@ class ExportService(models.TransientModel):
 
         for rec in recs:
             data = {
-                "id": rec.id,
+                "article_id": rec.id,
                 "date": rec.date.strftime("%d-%m-%Y"),
                 "published_on": rec.published_on.strftime("%d-%m-%Y"),
                 "blog_type": rec.category_id.type_id.code,
@@ -57,41 +57,45 @@ class ExportService(models.TransientModel):
                 "content": rec.content,
                 "previous": rec.get_previous(),
                 "next": rec.get_next(),
-                "related_ids": rec.get_related()
+                "related_ids": rec.get_related(),
+                "tags": rec.get_tags()
             }
 
             if rec.category_id:
-                data["category"] = {
-                    "id": rec.category_id.id,
-                    "name": rec.category_id.name,
-                    "code": rec.category_id.code,
-                    "url": rec.category_id.url,
-                    "description": rec.category_id.description,
+                category_data = {
+                    "category_id": rec.category_id.id,
+                    "category_name": rec.category_id.name,
+                    "category_code": rec.category_id.code,
+                    "category_url": rec.category_id.url,
+                    "category_description": rec.category_id.description,
                 }
+                data.update(category_data)
 
             if rec.sub_category_id:
-                data["sub_category"] = {
-                    "id": rec.sub_category_id.id,
-                    "name": rec.sub_category_id.name,
-                    "code": rec.sub_category_id.code,
-                    "url": rec.sub_category_id.url,
-                    "description": rec.sub_category_id.description,
+                sub_category_data = {
+                    "sub_category_id": rec.sub_category_id.id,
+                    "sub_category_name": rec.sub_category_id.name,
+                    "sub_category_code": rec.sub_category_id.code,
+                    "sub_category_url": rec.sub_category_id.url,
+                    "sub_category_description": rec.sub_category_id.description,
                 }
+                data.update(sub_category_data)
 
             if rec.gallery_ids:
                 data["galleries"] = [{
-                    "id": gallery.id,
-                    "name": gallery.name,
-                    "path": gallery.path,
-                    "description": gallery.description} for gallery in rec.gallery_ids]
+                    "gallery_id": gallery.id,
+                    "gallery_name": gallery.name,
+                    "gallery_path": gallery.path,
+                    "gallery_description": gallery.description} for gallery in rec.gallery_ids]
 
             if rec.gallery_id:
-                data["image"] = {
-                    "id": rec.gallery_id.id,
-                    "name": rec.gallery_id.name,
-                    "path": rec.gallery_id.path,
-                    "description": rec.gallery_id.description,
+                gallery_data = {
+                    "gallery_id": rec.gallery_id.id,
+                    "gallery_name": rec.gallery_id.name,
+                    "gallery_path": rec.gallery_id.path,
+                    "gallery_description": rec.gallery_id.description,
                 }
+                data.update(gallery_data)
 
             article.append(data)
 
