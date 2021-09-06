@@ -25,6 +25,38 @@ class BlogArticle(models.Model):
     is_completed = fields.Boolean(string="Is Completed", default=False)
     is_exported = fields.Boolean(string="Is Exported", default=False)
 
+    def get_tags(self):
+        data = []
+
+        if self.primary_tag_id:
+            data.append({
+                "tag_id": self.primary_tag_id.id,
+                "tag_name": self.primary_tag_id.name,
+                "tag_url": self.primary_tag_id.url,
+                "tag_code": self.primary_tag_id.code,
+                "tag_description": self.primary_tag_id.description,
+            })
+
+        if self.secondary_tag_id:
+            data.append({
+                "tag_id": self.secondary_tag_id.id,
+                "tag_name": self.secondary_tag_id.name,
+                "tag_url": self.secondary_tag_id.url,
+                "tag_code": self.secondary_tag_id.code,
+                "tag_description": self.secondary_tag_id.description,
+            })
+
+        for rec in self.other_tag_ids:
+            data.append({
+                "tag_id": rec.id,
+                "tag_name": rec.name,
+                "tag_url": rec.url,
+                "tag_code": rec.code,
+                "tag_description": rec.description,
+            })
+
+        return data
+
     def get_related(self):
         related = []
         obj = self.env["blog.article"].search([("primary_tag_id", "=", self.primary_tag_id.id),
